@@ -1,0 +1,12 @@
+.cache/**/*
+.idea/**/*
+dist/**/*
+lib/**/*
+__tests__/**/*
+*.spec.*
+npm-cache/**/*
+package-lock.json
+dev/**/*
+demo/**/*
+tsconfig.json
+tslint.json

@@ -1,0 +1,97 @@
+{
+  "name": "@webacceleration/perf-metrics",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [
+    "performance",
+    "metrics",
+    "javascript"
+  ],
+  "author": {
+    "name": "Ilya Zaytsev",
+    "email": "iam.ztsv@gmail.com"
+  },
+  "homepage": "https://github.com/WebAcceleration/perf-metrics",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WebAcceleration/perf-metrics"
+  },
+  "license": "MIT",
+  "main": "dist/browser/legacy/index.js",
+  "browser": "dist/browser/legacy/index.js",
+  "files": [
+    "dist/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "preversion": "npm run type-check && npm run lint:check && npm run test && npm run build",
+    "version": "",
+    "postversion": "npm publish",
+    "dev": "npm run clear:dist && NODE_ENV=development BROWSERSLIST_ENV=development webpack-dev-server --config ./configs/webpack.dev.js",
+    "build": "npm run clear:dist && npm run build:browser:legacy && npm run build:browser:modern",
+    "build:browser:legacy": "NODE_ENV=production BROWSERSLIST_ENV=legacy webpack --config ./configs/webpack.prod.js --progress",
+    "build:browser:modern": "NODE_ENV=production BROWSERSLIST_ENV=modern webpack --config ./configs/webpack.prod.js --progress",
+    "build:types": "tsc --declaration --emitDeclarationOnly --allowJs false",
+    "type-check": "tsc -p ./tsconfig.json --noEmit --skipLibCheck",
+    "type-check:watch": "npm run type-check -- --watch",
+    "lint:check": "NODE_ENV=production npm run tslint:check && npm run markdownlint:check",
+    "lint:fix": "npm run tslint:fix ",
+    "tslint:check": "NODE_ENV=production tslint -c tslint.json 'src/**/*.{ts,tsx}'",
+    "tslint:fix": "npm run tslint:check -- --fix",
+    "prettier:check": "prettier --list-different \"**/*.{ts,json,md}\"",
+    "prettier:fix": "prettier --list-different --write \"**/*.{ts,js,json,md}\"",
+    "markdownlint:check": "markdownlint -c ./node_modules/@webacceleration/markdownlint-config-base/.markdownlintrc src/**/*.md *.md",
+    "test": "npm run test:unit",
+    "test:unit": "jest --no-cache --config ./jest.config.js",
+    "test:unit:watch": "npm run test:unit -- --watch --cache --notify --notifyMode change",
+    "test:unit:update-snapshots": "npm run test:unit -- -u",
+    "test:unit:coverage": "npm run test:unit -- --coverage",
+    "test:unit:ci": "npm run test:unit -- --ci",
+    "clear:dist": "rimraf dist"
+  },
+  "engines": {
+    "node": ">= 10.8.0",
+    "npm": ">= 6.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-proposal-decorators": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-typescript": "^7.1.0",
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-conventional": "^7.5.0",
+    "@webacceleration/markdownlint-config-base": "^0.0.4",
+    "@webacceleration/prettier-config-base": "^0.0.4",
+    "@webacceleration/tslint-config-prettier": "^0.0.5",
+    "@types/jest": "^24.0.11",
+    "acorn": "^6.1.1",
+    "babel-loader": "^8.0.5",
+    "domutils": "^1.7.0",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.3.1",
+    "jest": "^24.7.1",
+    "lint-staged": "^8.1.5",
+    "markdownlint-cli": "^0.15.0",
+    "prettier": "^1.17.0",
+    "rimraf": "^2.6.3",
+    "terser-webpack-plugin": "^1.2.3",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.1.0",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.4",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.3.1",
+    "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "@types/doubleclick-gpt": "^238.0.2",
+    "core-js": "^3.0.1",
+    "rxjs": "^6.4.0"
+  }
+}
