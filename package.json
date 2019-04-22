@@ -92,6 +92,7 @@
   "dependencies": {
     "@types/doubleclick-gpt": "^238.0.2",
     "core-js": "^3.0.1",
+    "perfume.js": "^2.1.2",
     "rxjs": "^6.4.0"
   }
 }
